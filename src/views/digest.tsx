@@ -1,10 +1,8 @@
 import type { Child } from 'hono/jsx';
+import { isNight } from '../digest/night.js';
 import { readNight, type DigestRow, type Night } from '../digest/types.js';
 import type { Lane } from '../lane.js';
 import { Layout } from './layout.js';
-
-// A night is a date, and a filename under runs/. Anything else is 404, never joined.
-const NIGHT = /^\d{4}-\d{2}-\d{2}$/;
 
 const DASH = '—';
 
@@ -19,7 +17,7 @@ export function DigestPage({ night, lane: who }: { night: Night; lane: Lane }) {
 }
 
 export function renderDigest(runsDir: string, night: string, who: Lane) {
-  if (!NIGHT.test(night)) return missing(who);
+  if (!isNight(night)) return missing(who);
   const data = readNight(runsDir, night);
   if (!data) return missing(who);
   return { status: 200 as const, body: <DigestPage night={data} lane={who} /> };

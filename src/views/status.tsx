@@ -1,4 +1,4 @@
-import type { Status } from '../status.js';
+import type { Status, StatusNight } from '../status.js';
 
 export function StatusBoard({ status }: { status: Status }) {
   return (
@@ -19,11 +19,19 @@ export function StatusBoard({ status }: { status: Status }) {
         <p class="mute">nothing in runs/</p>
       ) : (
         <ul>
-          {status.nights.map((n) => (
-            <li>{n}</li>
+          {status.nights.map((night) => (
+            <li><a href={`/digest/${night.night}`}>{nightLabel(night)}</a></li>
           ))}
         </ul>
       )}
     </>
   );
+}
+
+function nightLabel(night: StatusNight): string {
+  return `${night.night} · ok ${shown(night.ok)} · retry ${shown(night.retry)} · fail ${shown(night.fail)}`;
+}
+
+function shown(count: number | null): string {
+  return count === null ? '—' : String(count);
 }

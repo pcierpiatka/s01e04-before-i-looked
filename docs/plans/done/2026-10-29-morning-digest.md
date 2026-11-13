@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-11-13
 ---
 
 # Morning digest
@@ -77,3 +78,19 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|-----------|--------|--------|
+| 1 | Run log reader | — | pi · grok-4.7 · high | 2026-11-13 |
+| 2 | Digest page | #1 | pi · grok-4.7 · high | 2026-11-13 |
+| 3 | Digest JSON | #1 | pi · grok-4.7 · high | 2026-11-13 |
+| 4 | Board link | #1 | pi · grok-4.7 · high | 2026-11-13 |
+| 5 | Route tests | #1 #2 #3 | pi · grok-4.7 · high | 2026-11-13 |
+| 6 | Publish the preview and send the reviewer the link | #2 #4 | claude-code · claude-fable-5-1 · high | 2026-11-13 |
+| 7 | Reviewer reads the preview | #6 | waits on the course reviewer | 2026-11-13 |
+| 8 | Clean up: marker off the preview, plan to done | #7 | claude-code · claude-fable-5-1 · high | 2026-11-13 |
+
+#7 is not in the plan as its own step: § 3 said "done when the link is sent". The split made the
+reviewer's reading its own issue, so § 4 could not start before it (ADR 0003).

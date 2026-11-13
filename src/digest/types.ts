@@ -19,9 +19,4 @@ export type Night = {
   badLines: number;
 };
 
-// Signature other parts import. The reader lands beside this file.
-export function readNight(runsDir: string, night: string): Night | null {
-  void runsDir;
-  void night;
-  return null;
-}
+export { readNight } from './read.js';

@@ -4,6 +4,7 @@ import { lane } from './lane.js';
 import { readStatus } from './status.js';
 import { Layout } from './views/layout.js';
 import { StatusBoard } from './views/status.js';
+import { renderDigest } from './views/digest.js';
 
 export function createApp(config: RigConfig = loadConfig()) {
   const app = new Hono();
@@ -17,6 +18,11 @@ export function createApp(config: RigConfig = loadConfig()) {
       </Layout>,
     ),
   );
+
+  app.get('/digest/:night', (c) => {
+    const page = renderDigest(config.runsDir, c.req.param('night'), lane());
+    return c.html(page.body, page.status);
+  });
 
   return app;
 }
